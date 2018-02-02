@@ -6,6 +6,16 @@
 * All strings values that MAY correspond to data types NULL and booleans SHOULD BE enclosed with in quotes (" or ')
 * All strings that start with a quote MUST end with same quote
 
+## Comments
+
+* Comments must be suffixed with "#"
+
+```yaml
+ice-cream: no # This is an inline comment
+# This is a full line comment
+steaks: yes # Another inline comment
+```
+
 ## NULLs
 
 Value | Parsed As
@@ -113,6 +123,4 @@ address:
 ```
 array(5) { ["city"]=> string(9) "Islamabad" ["lines"]=> string(32) "Main Margalla Ave. Sector F-11/4" ["state"]=> string(3) "ICT" ["country"]=> string(2) "PK" ["zip"]=> int(44000) } 
 ```
-
-
 
