@@ -54,32 +54,29 @@ corresponding key.
 String values following in next lines after key MUST have higher indention then key it self, otherwise it will be 
 parsed as NULL.
 
+### Types
 
-* ">" will glue multi-line strings with a space " "
-* "|" will glue multi-line strings with line breaks
+">" will glue multi-line strings with a space " "
 
 ```yaml
-address: >
+something: >
   The quick brown fox
   jumps over 
   the lazy dog
 ```
+```
+The quick brown fox jumps over the lazy dog
+```
 
-will be parsed as:
 
-```The quick brown fox jumps over the lazy dog```
-
-while...
+"|" will glue multi-line strings with line breaks
 
 ```yaml
-address: |
+something: |
   The quick brown fox
   jumps over 
   the lazy dog
 ```
-
-will be parsed as:
-
 ```
 The quick brown fox 
 jumps over
