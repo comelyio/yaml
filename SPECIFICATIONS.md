@@ -1,0 +1,49 @@
+# Comely YAML Specifications
+
+* All YAML files and keys MUST BE named in alpha-numeric digits
+* All YAML files and keys MAY have "." dot(s) , "-" dash(es) and "_" underscore(s)
+* All strings values that correspond to data types NULL and booleans should be enclosed with in quotes (" or ')
+* All strings that start with a quote MUST end with same quote
+
+### NULLs
+
+Value | Parsed As
+--- | ---
+*no value* | NULL
+~ | NULL
+"~" | string(1) "~"
+null | NULL
+NULL | NULL
+"null" | string(4) "null"
+
+### Evaluate Booleans
+
+Evaluate booleans behaviour may be enabled optionally to automatically detect and convert values like "true", "false", 
+"on", "off", "yes" and "no" to booleans.
+
+**Note:** Enclosing such values with quotes (" or ') will not convert them to booleans. See table below:
+
+Value | Parsed As
+--- | ---
+true | bool(true)
+"true" | string(4) "true"
+"false" | string(5) "false"
+false | bool(false)
+1 | int(1)
+0 | int(0)
+on | bool(true)
+off | bool(false)
+"off" | string(3) "off"
+"yes" | string(3) "yes"
+yes | bool(true)
+no | bool(false)
+
+### Long Strings
+
+
+
+
+### Values
+
+### Imports
+
