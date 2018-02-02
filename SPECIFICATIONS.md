@@ -1,11 +1,12 @@
 # Comely YAML Specifications
 
+* All YAML files MUST have either ".yaml" or ".yml" extension
 * All YAML files and keys MUST BE named in alpha-numeric digits
 * All YAML files and keys MAY have "." dot(s) , "-" dash(es) and "_" underscore(s)
-* All strings values that correspond to data types NULL and booleans should be enclosed with in quotes (" or ')
+* All strings values that MAY correspond to data types NULL and booleans SHOULD BE enclosed with in quotes (" or ')
 * All strings that start with a quote MUST end with same quote
 
-### NULLs
+## NULLs
 
 Value | Parsed As
 --- | ---
@@ -16,10 +17,17 @@ null | NULL
 NULL | NULL
 "null" | string(4) "null"
 
-### Evaluate Booleans
+## Evaluate Booleans
 
 Evaluate booleans behaviour may be enabled optionally to automatically detect and convert values like "true", "false", 
 "on", "off", "yes" and "no" to booleans.
+
+### Enabling
+
+```php
+$parser = Yaml::Parse("some-yaml-file.yaml")
+    ->evaluateBooleans();
+```
 
 **Note:** Enclosing such values with quotes (" or ') will not convert them to booleans. See table below:
 
@@ -38,7 +46,7 @@ off | bool(false)
 yes | bool(true)
 no | bool(false)
 
-### Long Strings
+## Long Strings
 
 
 
