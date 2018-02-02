@@ -14,10 +14,31 @@ declare(strict_types=1);
 
 namespace Comely\IO\Yaml\Parser\Buffer;
 
+use Throwable;
+
 /**
  * Class LineException
  * @package Comely\IO\Yaml\Parser\Buffer
  */
 class LineException extends \Exception
 {
+    /** @var int */
+    public $lineNum;
+    /** @var int|null */
+    public $lineIndent;
+
+    /**
+     * LineException constructor.
+     * @param Line $line
+     * @param string $message
+     * @param int $code
+     * @param Throwable|null $previous
+     */
+    public function __construct(Line $line, string $message = "", int $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+
+        $this->lineNum = $line->num;
+        $this->lineIndent = $line->indent;
+    }
 }

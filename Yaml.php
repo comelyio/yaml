@@ -27,4 +27,13 @@ class Yaml implements ComponentInterface
     public const KEYS_SNAKE_CASE = 1002;
     public const OUTPUT_SET_INACCESSIBLE = 1101;
     public const OUTPUT_IGNORE_INACCESSIBLE = 1102;
+
+    /**
+     * @param string $yamlFile
+     * @return Parser
+     */
+    public static function Parse(string $yamlFile) : Parser
+    {
+        return new Parser($yamlFile);
+    }
 }
