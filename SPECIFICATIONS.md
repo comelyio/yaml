@@ -124,3 +124,19 @@ address:
 array(5) { ["city"]=> string(9) "Islamabad" ["lines"]=> string(32) "Main Margalla Ave. Sector F-11/4" ["state"]=> string(3) "ICT" ["country"]=> string(2) "PK" ["zip"]=> int(44000) } 
 ```
 
+## Imports
+
+* All imports MUST BE defined as sequences in a key "imports"
+* Only relative paths MUST BE used
+
+*config.yml*
+```yaml
+imports:
+  - app.yml
+
+site:
+  name: Comely
+  imports:
+    - site/site-config.yml
+```
+
