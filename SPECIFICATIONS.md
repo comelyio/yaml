@@ -128,15 +128,68 @@ array(5) { ["city"]=> string(9) "Islamabad" ["lines"]=> string(32) "Main Margall
 
 * All imports MUST BE defined as sequences in a key "imports"
 * Only relative paths MUST BE used
+* Values from imported files having same keys will be overwritten
 
-*config.yml*
+---
+
+*main.yml*
 ```yaml
 imports:
   - app.yml
+  - settings.yml
 
 site:
-  name: Comely
   imports:
     - site/site-config.yml
+    
+  name: Comely
 ```
 
+*app.yml*
+```yaml
+app:
+ id: Test app
+ version: 0.1.19
+```
+
+*settings.yml*
+```yaml
+settings:
+ frontend: off
+ backend: on
+```
+
+*site/site-config.yml*
+```yaml
+name: Untitled
+url: https://comely.io
+```
+
+---
+
+Parsed YAML var_dump:
+```
+array(3) {
+  ["app"]=>
+  array(2) {
+    ["id"]=>
+    string(8) "Test app"
+    ["version"]=>
+    string(6) "0.1.19"
+  }
+  ["settings"]=>
+  array(2) {
+    ["frontend"]=>
+    bool(false)
+    ["backend"]=>
+    bool(true)
+  }
+  ["site"]=>
+  array(2) {
+    ["name"]=>
+    string(6) "Comely"
+    ["url"]=>
+    string(17) "https://comely.io"
+  }
+}
+```
