@@ -54,9 +54,7 @@ corresponding key.
 String values following in next lines after key MUST have higher indention then key it self, otherwise it will be 
 parsed as NULL.
 
-### Types
-
-">" will glue multi-line strings with a space " "
+**">" will glue multi-line strings with a space**
 
 ```yaml
 something: >
@@ -68,8 +66,7 @@ something: >
 The quick brown fox jumps over the lazy dog
 ```
 
-
-"|" will glue multi-line strings with line breaks
+**"|" will glue multi-line strings with line breaks**
 
 ```yaml
 something: |
@@ -83,7 +80,39 @@ jumps over
 the lazy dog
 ```
 
-### Values
+## Sequences
 
-### Imports
+Yaml sequences will be parsed as arrays and all items will be pre-processed. Here is an example:
+
+```yaml
+basket:
+  - apple
+  - mango
+  - 23.2
+  - true
+  - "true"
+  - -1.33
+  - 19
+```
+```
+array(7) { [0]=> string(5) "apple" [1]=> string(5) "mango" [2]=> float(23.2) [3]=> bool(true) [4]=> string(4) "true" [5]=> float(-1.33) [6]=> int(19) } 
+```
+
+## Associative Arrays
+
+```yaml
+address:
+  city: Islamabad
+  lines: >
+    Main Margalla Ave.
+    Sector F-11/4
+  state: ICT
+  country: PK
+  zip: 44000
+```
+```
+array(5) { ["city"]=> string(9) "Islamabad" ["lines"]=> string(32) "Main Margalla Ave. Sector F-11/4" ["state"]=> string(3) "ICT" ["country"]=> string(2) "PK" ["zip"]=> int(44000) } 
+```
+
+
 
