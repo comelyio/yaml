@@ -48,8 +48,43 @@ no | bool(false)
 
 ## Long Strings
 
+String values CAN BE split across multiple lines, provided that "|" or ">" is passed directly as value to 
+corresponding key.
+
+String values following in next lines after key MUST have higher indention then key it self, otherwise it will be 
+parsed as NULL.
 
 
+* ">" will glue multi-line strings with a space " "
+* "|" will glue multi-line strings with line breaks
+
+```yaml
+address: >
+  The quick brown fox
+  jumps over 
+  the lazy dog
+```
+
+will be parsed as:
+
+```The quick brown fox jumps over the lazy dog```
+
+while...
+
+```yaml
+address: |
+  The quick brown fox
+  jumps over 
+  the lazy dog
+```
+
+will be parsed as:
+
+```
+The quick brown fox 
+jumps over
+the lazy dog
+```
 
 ### Values
 
