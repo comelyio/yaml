@@ -141,7 +141,6 @@ imports:
 site:
   imports:
     - site/site-config.yml
-    
   name: Comely
 ```
 
