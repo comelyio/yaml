@@ -2,7 +2,7 @@
 
 YAML component for your comely apps.
 
-YAML component will parse Yaml files to objects or compose Yaml files from given objects
+YAML component will parse Yaml files to an array or compile Yaml files from given array
 
 ## Prerequisites
 

@@ -16,7 +16,6 @@ namespace Comely\IO\Yaml;
 
 use Comely\IO\Yaml\Exception\ParserException;
 use Comely\IO\Yaml\Parser\Buffer;
-use Comely\IO\Yaml\Parser\Output\ParsedYamlObject;
 
 /**
  * Class Parser
@@ -28,12 +27,6 @@ class Parser
     private $yamlPath;
     /** @var string */
     private $baseDirectory;
-    /** @var null|object */
-    private $outputObject;
-    /** @var int */
-    private $outputInaccessibleKeys;
-    /** @var int */
-    private $convertKeys;
     /** @var bool */
     private $evaluateBooleans;
     /** @var string */
@@ -49,10 +42,8 @@ class Parser
         $this->setYamlPath($yamlFile);
 
         // Default configuration
-        $this->convertKeys = Yaml::KEYS_DEFAULT;
         $this->evaluateBooleans = false;
         $this->eolChar = PHP_EOL;
-        $this->outputInaccessibleKeys = Yaml::OUTPUT_SET_INACCESSIBLE;
     }
 
     /**
@@ -98,28 +89,6 @@ class Parser
     }
 
     /**
-     * Convert keys
-     * @param int $flag
-     * @return Parser
-     * @throws ParserException
-     */
-    public function convertKeys(int $flag): self
-    {
-        $allowed = [
-            Yaml::KEYS_DEFAULT,
-            Yaml::KEYS_SNAKE_CASE,
-            Yaml::KEYS_CAMEL_CASE
-        ];
-
-        if (!in_array($flag, $allowed)) {
-            throw new ParserException('Flag passed to "convertKeys" method must be a valid Yaml::KEYS_* flag');
-        }
-
-        $this->convertKeys = $flag;
-        return $this;
-    }
-
-    /**
      * Set EOL character
      * @param string $eol
      * @return Parser
@@ -131,40 +100,6 @@ class Parser
         }
 
         $this->eolChar = $eol;
-        return $this;
-    }
-
-    /**
-     * Map values to a custom object that implements ParsedYamlObject interface
-     * @param $object
-     * @param int|null $flag
-     * @return Parser
-     */
-    public function outputObject($object, int $flag = Yaml::OUTPUT_SET_INACCESSIBLE): self
-    {
-        if (!is_object($object)) {
-            throw new ParserException('Method "outputObject" only accepts instantiated objects');
-        }
-
-        if (!$object instanceof ParsedYamlObject) {
-            throw new ParserException(
-                sprintf('Object "%s" must implement "ParsedYamlObject" interface', get_class($object))
-            );
-        }
-
-        // Set or ignore mapping values to inaccessible properties?
-        // (i.e. props. that don't exist)
-        $allowed = [
-            Yaml::OUTPUT_SET_INACCESSIBLE,
-            Yaml::OUTPUT_IGNORE_INACCESSIBLE
-        ];
-
-        if (!in_array($flag, $allowed)) {
-            throw new ParserException('Option flag to "outputObject" must be a valid Yaml::OUTPUT_* flag');
-        }
-
-        $this->outputObject = $object;
-        $this->outputInaccessibleKeys = $flag;
         return $this;
     }
 
@@ -269,8 +204,7 @@ class Parser
                             try {
                                 $parser = Yaml::Parse($this->baseDirectory . DIRECTORY_SEPARATOR . $value)
                                     ->setEOL($this->eolChar)
-                                    ->evaluateBooleans($this->evaluateBooleans)
-                                    ->convertKeys($this->convertKeys);
+                                    ->evaluateBooleans($this->evaluateBooleans);
                                 $value = $parser->generate(); // returns array
                             } catch (ParserException $e) {
                                 throw new ParserException(
