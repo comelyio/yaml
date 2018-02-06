@@ -30,4 +30,13 @@ class Yaml implements ComponentInterface
     {
         return new Parser($yamlFile);
     }
+
+    /**
+     * @param array $in
+     * @return Compiler
+     */
+    public static function Compile(array $in): Compiler
+    {
+        return new Compiler($in);
+    }
 }
