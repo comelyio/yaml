@@ -106,7 +106,7 @@ class Parser
     /**
      * @throws ParserException
      */
-    public function generate()
+    public function generate(): array
     {
         // Input YAML source
         $read = file_get_contents($this->yamlPath);
