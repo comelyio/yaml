@@ -56,7 +56,6 @@ class Parser
         $chars = preg_quote(':._-\/\\\\', '#');
         $pattern = '#^[\w' . $chars . ']+\.(yaml|yml)$#';
         if (!preg_match($pattern, $yamlPath)) {
-            var_dump($yamlPath);
             throw new ParserException('Given path to YAML file is invalid');
         }
 
